@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <title>APP Prototyp</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script>
+        function showPage(p){
+            pageArr = document.getElementsByClassName("page");
+            for (let i = 0; i < pageArr.length; i++){
+                let page = pageArr[i];
+                page.style.display = "none";
+            }
+            document.getElementById("page" + p).style.display = "block";
+        }
+    </script>
+    <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+    <script src="https://raw.githack.com/HGustavs/Shaker.js/master/shaker.js"></script>
+
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+        .title{
+        color: white;
+        font-size: 30px;
+        font-weight: 400;
+        font-family: 'Dancing Script', cursive;
+        background: #336633;
+        padding: 5px 0px 10px 10px;
+
+        }
+        .button{
+        padding: 1px 4px;
+        }
+        h1{
+        font-size: 24px;
+        padding: 5px;
+        }
+        body{
+        font-family: 'Playfair Display', serif;
+        background: #eeffdd;
+        }
+        p{
+        margin: 2px;
+        }
+        h3{
+        font-size: 20px;
+        }
+        .with-ellipsis{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        }
+        .no-ellipsis{
+        overflow: initial;
+        text-overflow:initial;
+        white-space: initial;
+        }
+        .window1{
+        background: #aaff88;
+        padding: 10px;
+        margin: 10px;
+        box-shadow: 0px 0px 2px 2px grey;
+        }
+
+        .tooltipAnchor {
+        background-color: black;
+        color: white;
+        margin: 10px;
+        padding: 5px;
+        }
+
+        .tooltip{
+        position:absolute;
+        bottom:20px;
+        left:0px;
+        width: auto;
+        background-color: lightgreen;
+        color:black;
+        border: 1px solid black;
+        opacity:0;
+        overflow: hidden;
+        padding:5px;
+
+        transition-property:opacity;
+        transition-duration:1.0s;
+        transition-delay: 0s;
+        transition-timing-function: ease-in;
+        }
+        .sideA {
+        opacity: 0;
+        }
+        .sideB {
+        opacity: 1;
+        background: red;
+        color: white;
+        padding: 10px;
+        margin: 5px;
+        max-width: 100%;
+        }
+        #carouselExampleIndicators{
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        background: #336633;
+        padding: 10px;
+        }
+        @keyframes leaf{
+        0% {
+        transform: rotate(0deg);
+        }
+        25%
+        {
+        transform: rotate(-23deg);
+        }
+        50%
+        {
+        transform: rotate(-45deg);
+        }
+        100%
+        {
+        transform: rotate(0deg);
+        }
+        }
+        #leaf{
+        animation-name: leaf;
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+        }
+        #mittkop{
+        margin: 10px;
+        padding: 5px;
+        width: 200px;
+        background: white;
+        border: 1px solid black;
+        }
+        #köpknapp{
+        width: auto;
+        margin: 2px;
+        color: white;
+        background: black;
+        }
+        .piccol{
+        background: black;
+        padding: 15px 5px;
+        margin: 10px;
+        border-radius: 10px;
+        }
+        .figure-caption{
+        max-width: 360px;
+        color: white;
+        }
+        #modalbutton{
+        margin: 10px;
+        }
+        #innerflower{
+        transform: translate(60px,60px);
+        }
+        #outerflower1{
+        transform: translate(40px,40px);
+        }
+        #outerflower2{
+        transform: translate(80px,40px);
+        }
+        #outerflower3{
+        transform: translate(40px,80px);
+        }
+        #outerflower4{
+        transform: translate(80px,80px);
+        }
+
+        @keyframes flower{
+        0% {
+        transform: translate(0px, 0px);
+        }
+        40%
+        {
+        transform: translate(0px, 15px);
+        }
+        50%
+        {
+        transform: translate(0px, 4px);
+        }
+        75%
+        {
+        transform: translate(0px, 1px);
+        }
+        100%
+        {
+        transform: translate(0px, 0px);
+        }
+        }
+        #flower{
+        animation-name: flower;
+        animation-duration: 0.8s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        }
+    </style>
+    <script>
+            function tap(event){
+                if(event.target.className=="with-ellipsis"){
+                event.target.className="no-ellipsis";
+            }
+                else{
+                event.target.className="with-ellipsis";
+                }
+            }
+
+            function init(){
+            var toucharea = document.getElementById("omoss");
+            toucharea.className="with-ellipsis";
+            var mc = new Hammer(toucharea);
+            mc.on("doubletap", function (event){tap(event)});
+
+
+            var element = document.getElementById("pressElement");
+            var hammertime = Hammer(element);
+            hammertime.on("press", function(event) {
+                document.getElementById("tooltip").style.opacity="1";
+            });
+            hammertime.on("pressup", function(event) {
+                document.getElementById("tooltip").style.opacity="0";
+            })
+
+            var element = document.getElementById("testelement");
+            Hammer(element).on("tap", function(event) {
+                document.getElementById("flipSide").play();
+            });
+            Hammer(element).on("tap", function(event) {
+                document.getElementById("throwaway").play();
+            });
+
+            }
+            shaker.on("state", function (edata) {
+            var element = document.getElementById("content");
+                if (edata=="LSIDE"||edata=="RSIDE") {
+                    element.className = "sideB";
+                }
+
+                else {
+                    element.className = "sideA";
+                }
+            });
+            var mittVarde = 0;
+
+            function minGrej1() {
+                mittVarde = mittVarde + 1;
+                document.getElementById("mittkop").innerHTML = "Antal varor i korg: "+mittVarde;
+            }
+            function minGrej2() {
+                mittVarde = 0;
+                document.getElementById("mittkop").innerHTML = "Antal varor i korg: "+mittVarde;
+            }
+        </script>
+</head>
+<body onload="showPage(1); init(); initShaker(); initHammer();">
+<div id="page1" class="page">
+    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><div class="title">Lenas Trädgårdar <img src="Leaf.svg" id="leaf" x=0 y=0 width=30px; height=30px;></div></a>
+    <div class="collapse" id="collapseExample">
+        <nav class="navbar navbar-dark" id="menu" style="background-color: #003311;">
+            <form class="form-inline">
+                <div class="button" id="startsida">
+                    <button class="btn btn-outline-light" type="button">Startsida</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(2);">Om oss</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(3);">Sortiment</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(4);">Galleri</button>
+                </div>
+            </form>
+        </nav>
+    </div>
+    <div id="content" class="sideB">Du är i fel läge för startsidan, var vänligen vänd din mobil till porträttläge!!!</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-6 col-lg-12">
+                <div class="window1">
+                    <h1>Välkommen till Lenas Trädgårdar! </h1>
+                    <p>På Lenas Trädgårdar appen kan du beställa växter, se den fysiska affärens öppettider m.m.
+                        <svg>
+                            <g id="flower">
+                                <circle id="outerflower1" fill="#eeaaaa" fill-rule="evenodd" stroke="#773300" stroke-width="1" clip-rule="evenodd" cx="0" cy="0" r="20" />
+                                <circle id="outerflower2" fill="#eeaaaa" fill-rule="evenodd" stroke="#773300" stroke-width="1" clip-rule="evenodd" cx="0" cy="0" r="20" />
+                                <circle id="outerflower3" fill="#eeaaaa" fill-rule="evenodd" stroke="#773300" stroke-width="1" clip-rule="evenodd" cx="0" cy="0" r="20" />
+                                <circle id="outerflower4" fill="#eeaaaa" fill-rule="evenodd" stroke="#773300" stroke-width="1" clip-rule="evenodd" cx="0" cy="0" r="20" />
+                                <circle id="innerflower" fill="#eeeeaa" fill-rule="evenodd" stroke="#773300" stroke-width="1" clip-rule="evenodd" cx="0" cy="0" r="15" />
+                            </g>
+                        </svg>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="modalbutton"></div>
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalLong">
+            Licensinformation
+        </button>
+    </div>
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Licensinformation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h3>Ljud</h3>
+                    <p><a href="http://soundbible.com/2044-Tick.html"> "Tick" </a> av DeepFrozenApps, och licensen är <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+                    <p><a href="http://soundbible.com/2044-Tick.html"> "Woosh Sound" </a> av Mark DiAngelo, och licensen är <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></p>
+                    <h3>Bilder</h3>
+                    <p><a href="https://www.flickr.com/photos/61926883@N00/489174858"> "Cactus" </a> av <a href="https://www.flickr.com/photos/drb62/"> Daniel R. Blume</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></p>
+                    <p><a href="https://www.flickr.com/photos/61926883@N00/2268738205"> "Ball of thorns" </a> av <a href="https://www.flickr.com/photos/drb62/"> Daniel R. Blume</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></p>
+                    <p><a href="https://www.flickr.com/photos/18090920@N07/15251116527"> "Flower" </a> av <a href="https://www.flickr.com/photos/smemon/"> Sean MacEntee</a>, och licensen är <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></p>
+                    <p><a href="https://www.flickr.com/photos/35205957@N08/11202412655"> "Red Flower - is a rose" </a> av <a href="https://www.flickr.com/photos/behinddreaming/"> Allison Brown</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></p>
+                    <p><a href="https://www.flickr.com/photos/182149218@N06/48141201123"> "IMG_0014c" </a> av <a href="https://www.flickr.com/photos/182149218@N06/"> Drew Martin</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></p>
+                    <p><a href="https://www.flickr.com/photos/34942348@N04/3541160224"> "Happy Dan" </a> av <a href="https://www.flickr.com/photos/bradmontgomery/"> Brad Montgomery</a>, och licensen är <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></p>
+                    <p><a href="https://www.flickr.com/photos/28270573@N03/3636718170"> "DSCN5505" </a> av <a href="https://www.flickr.com/photos/tomflem/"> Tom Flemming</a>, och licensen är <a href="https://creativecommons.org/licenses/by-nc/2.0/">CC BY-NC 2.0</a></p>
+                    <p><a href="https://www.flickr.com/photos/62933269@N00/4809050696"> "Red Flowers" </a> av <a href="https://www.flickr.com/photos/theclyde/"> Craig Benett</a>, och licensen är <a href="https://creativecommons.org/licenses/by-nc/2.0/?ref=ccsearch&atype=rich">CC BY-NC 2.</a></p>
+                    <p>Leaf made by me</p>
+                    <h3>Fonter</h3>
+                    <p><a href="https://fonts.google.com/specimen/Dancing+Script"> "Dancing Script" </a> av  Impallari Type, och licensen är <a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL_web">Open Font Licence</a></p>
+                    <p><a href="https://fonts.google.com/specimen/Playfair+Display"> "Playfair Display" </a> av  Claus Eggers Sørensen, och licensen är <a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL_web">Open Font Licence</a></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="page2" class="page">
+    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><div class="title">Lenas Trädgårdar <img src="Leaf.svg" id="leaf" x=0 y=0 width=30px; height=30px;></div></a>
+    <div class="collapse" id="collapseExample">
+        <nav class="navbar navbar-dark" id="menu" style="background-color: #003311;">
+            <form class="form-inline">
+                <div class="button">
+                    <button class="btn btn-outline-light" type="button">Om oss</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(1);">Startsida</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(3);">Sortiment</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(4);">Galleri</button>
+                </div>
+            </form>
+        </nav>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-6 col-lg-12">
+                <div id="touch-area">
+                    <div class="window1">
+                        <p id="omoss" class="no-ellipsis">Lenas Trädgårdar har sitt säte i Arvika, Värmland. I vår mysiga butik kan man skaffa allt från växter, blomsterarrangemang och jord. Vi försöker jobba på ett hållbart sätt och vi jobbar nära med våra leverantörer för att se till att alla våra produkter håller kvaliten vi söker.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-md-6 col-lg-12">
+                <span id="pressElement" class="tooltipAnchor">Öppettider<span id="tooltip" class="tooltip"><p>Måndag till Fredag: 9-19</p><p>Lördag: 11-17</p><p>Söndag: 10-16</p></span></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="page3" class="page">
+    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><div class="title">Lenas Trädgårdar <img src="Leaf.svg" id="leaf" x=0 y=0 width=30px; height=30px;></div></a>
+    <div class="collapse" id="collapseExample">
+        <nav class="navbar navbar-dark" id="menu" style="background-color: #003311;">
+            <form class="form-inline">
+                <div class="button">
+                    <button class="btn btn-outline-light" type="button">Sortiment</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(1);">Startsida</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(2);">Om oss</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(4);">Galleri</button>
+                </div>
+            </form>
+        </nav>
+    </div>
+    <div id="mittkop"></div>
+    <button id="köpknapp" onclick="minGrej2(); document.getElementById('throwaway').play()"; class="köp">Töm korg</button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="piccol">
+                <div class="col-sm-3 col-md-6 col-lg-12">
+                    <figure class="figure">
+                        <img src="Kaktuskop1.jpg" class="figure-img img-fluid rounded" alt="Kaktus 1">
+                        <figcaption class="figure-caption"><a href="https://www.flickr.com/photos/61926883@N00/489174858"> "Cactus" </a> av <a href="https://www.flickr.com/photos/drb62/"> Daniel R. Blume</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></figcaption>
+                        <button id="köpknapp" onclick="minGrej1(); document.getElementById('flipSide').play()"; class="köp">Köp</button>
+                    </figure>
+                </div>
+            </div>
+            <div class="piccol">
+                <div class="col-sm-3 col-md-6 col-lg-12">
+                    <figure class="figure">
+                        <img src="Kaktuskop2.jpg" class="figure-img img-fluid rounded" alt="Kaktus 2">
+                        <figcaption class="figure-caption"><a href="https://www.flickr.com/photos/61926883@N00/2268738205"> "Ball of thorns" </a> av <a href="https://www.flickr.com/photos/drb62/"> Daniel R. Blume</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></figcaption>
+                        <button id="köpknapp" onclick="minGrej1(); document.getElementById('flipSide').play()"; class="köp">Köp</button>
+                    </figure>
+                </div>
+            </div>
+            <div class="piccol">
+                <div class="col-sm-3 col-md-6 col-lg-12">
+                    <figure class="figure">
+                        <img src="Blommakop1.jpg" class="figure-img img-fluid rounded" alt="Röd blomma 1">
+                        <figcaption class="figure-caption"><a href="https://www.flickr.com/photos/18090920@N07/15251116527"> "Flower" </a> av <a href="https://www.flickr.com/photos/smemon/"> Sean MacEntee</a>, och licensen är <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></figcaption>
+                        <button id="köpknapp" onclick="minGrej1(); document.getElementById('flipSide').play()"; class="köp">Köp</button>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="piccol">
+                <div class="col-sm-3 col-md-6 col-lg-12">
+                    <figure class="figure">
+                        <img src="Blommakop2.jpg" class="figure-img img-fluid rounded" alt="Röd blomma 2">
+                        <figcaption class="figure-caption"><a href="https://www.flickr.com/photos/35205957@N08/11202412655"> "Red Flower - is a rose" </a> av <a href="https://www.flickr.com/photos/behinddreaming/"> Allison Brown</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></figcaption>
+                        <button id="köpknapp" onclick="minGrej1(); document.getElementById('flipSide').play()"; class="köp">Köp</button>
+                    </figure>
+                </div>
+            </div>
+            <div class="piccol">
+                <div class="col-sm-3 col-md-6 col-lg-12">
+                    <figure class="figure">
+                        <img src="Tomtekop1.jpg" class="figure-img img-fluid rounded" alt="Tomte 1">
+                        <figcaption class="figure-caption"><a href="https://www.flickr.com/photos/182149218@N06/48141201123"> "IMG_0014c" </a> av <a href="https://www.flickr.com/photos/182149218@N06/"> Drew Martin</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></figcaption>
+                        <button id="köpknapp" onclick="minGrej1(); document.getElementById('flipSide').play()"; class="köp">Köp</button>
+                    </figure>
+                </div>
+            </div>
+            <div class="piccol">
+                <div class="col-sm-3 col-md-6 col-lg-12">
+                    <figure class="figure">
+                        <img src="Tomtekop2.jpg" class="figure-img img-fluid rounded" alt="Tomte 2">
+                        <figcaption class="figure-caption"><a href="https://www.flickr.com/photos/34942348@N04/3541160224"> "Happy Dan" </a> av <a href="https://www.flickr.com/photos/bradmontgomery/"> Brad Montgomery</a>, och licensen är <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></figcaption>
+                        <button id="köpknapp" onclick="minGrej1(); document.getElementById('flipSide').play()"; class="köp">Köp</button>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="page4" class="page">
+    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><div class="title">Lenas Trädgårdar <img src="Leaf.svg" id="leaf" x=0 y=0 width=30px; height=30px;></div></a>
+    <div class="collapse" id="collapseExample">
+        <nav class="navbar navbar-dark" id="menu" style="background-color: #003311;">
+            <form class="form-inline">
+                <div class="button">
+                    <button class="btn btn-outline-light" type="button">Galleri</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(1);">Startsida</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(2);">Om oss</button>
+                </div>
+                <div class="button">
+                    <button class="btn btn-sm btn-outline-success" type="button" onclick="showPage(3);">Sortiment</button>
+                </div>
+            </form>
+        </nav>
+    </div>
+    <h1>Galleri</h1>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="Kaktus1.jpg" alt="Bild av kaktus">
+                <div class="carousel-caption">
+                    <p><a href="https://www.flickr.com/photos/61926883@N00/463414484"> "Cactus" </a> av <a href="https://www.flickr.com/photos/drb62/"> Daniel R. Blume</a>, och licensen är <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="Blomsterbutik1.jpg" alt="Bild av blomsterbutik">
+                <div class="carousel-caption">
+                    <p><a href="https://www.flickr.com/photos/28270573@N03/3636718170"> "DSCN5505" </a> av <a href="https://www.flickr.com/photos/tomflem/"> Tom Flemming</a>, och licensen är <a href="https://creativecommons.org/licenses/by-nc/2.0/">CC BY-NC 2.0</a></p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="Blomma2.jpg" alt="Bild av röda blommor">
+                <div class="carousel-caption">
+                    <p><a href="https://www.flickr.com/photos/62933269@N00/4809050696"> "Red Flowers" </a> av <a href="https://www.flickr.com/photos/theclyde/"> Craig Benett</a>, och licensen är <a href="https://creativecommons.org/licenses/by-nc/2.0/?ref=ccsearch&atype=rich">CC BY-NC 2.</a></p>
+                </div>
+            </div>
+            <div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<audio id="flipSide">
+    <source src="http://soundbible.com/grab.php?id=2068&type=mp3" type="audio/mpeg">
+</audio>
+<audio id="throwaway">
+    <source src="Tick-DeepFrozenApps-397275646.mp3" type="audio/mpeg">
+</audio>
+</body>
+</html>
