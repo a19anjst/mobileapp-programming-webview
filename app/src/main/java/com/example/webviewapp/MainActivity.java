@@ -59,7 +59,8 @@ public class MainActivity extends AppCompatActivity {
         WebView myWebView = (WebView) findViewById(R.id.my_webview);
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        myWebView.loadUrl("https://his.se");
+        showExternalWebPage();
+        showInternalWebPage();
     }
 
     @Override
