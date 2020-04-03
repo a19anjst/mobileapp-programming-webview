@@ -18,10 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
+        WebView myWebView = (WebView) findViewById(R.id.my_webview);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("https://www.his.se/");
     }
 
     public void showInternalWebPage(){
         // TODO: Add your code for showing internal web page here
+        WebView myWebView = (WebView) findViewById(R.id.my_webview);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("file:///android_asset/app_prototyp.html");
     }
 
     @Override
@@ -56,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
            one (1) screenshot showing your external web page.
         */
 
-        WebView myWebView = (WebView) findViewById(R.id.my_webview);
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
     }
 
     @Override
@@ -77,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_external_web) {
-            Log.d("==>","Will display external web page");
+            showExternalWebPage();
             return true;
         }
 
         if (id == R.id.action_internal_web) {
-            Log.d("==>","Will display internal web page");
+            showInternalWebPage();
             return true;
         }
 
